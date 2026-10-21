@@ -2,12 +2,12 @@
 
 Below you will find the complete changelog of every Vanilla RTX version, from the earliest changelogs still on record up to the latest release. Newest versions come first. Future versions will be added once an update is released.
 
-Unless a note says otherwise, everything listed applies to all three packs: Vanilla RTX, Vanilla RTX Normals/Opus and is called out where it matters.
+Unless a note says otherwise, everything listed applies to all three packs: Vanilla RTX, Vanilla RTX Normals, and Vanilla RTX Opus. Differences are called out where they matter.
 
 A few terms you'll run into:
 - **Enhanced option:** an optional subpack that fixes ray tracing bugs in the base game through workarounds. It was called **Experimental** from 1.20.5 to 1.21.50, renamed to **Enhanced** in 1.21.60, and merged into the main pack in 1.21.206.
 - **MER / MERS:** the material textures (metalness, emissive, roughness, and later subsurface scattering properties) of a block.
-- **Normal maps / Heightmaps:** texture definitions that simulates surface details, like bumps or dents. Heightmap changes apply only to Vanilla RTX and Normal maps changes only Vanilla RTX Normals, both packs utilize this to carve out the shape of each block to further elevate its character in their own unique way. Vanilla RTX Opus is impacted by any changes to types of texture map.
+- **Normal maps / Heightmaps:** texture maps that simulate surface details, like bumps and dents. Vanilla RTX uses heightmaps and Vanilla RTX Normals uses normal maps, and both packs use them to carve out the shape of each block and elevate its character in their own unique way. Heightmap changes therefore apply only to Vanilla RTX, and normal map changes only to Vanilla RTX Normals. Vanilla RTX Opus is affected by both.
 - **MCPE-{Bug ID}:** a bug report on Mojang's issue tracker, [Mojira](https://bugs.mojang.com/).
 
 # Table of Contents
@@ -50,7 +50,7 @@ A few terms you'll run into:
 - [1.7.8](#178)
 - [1.7.7](#177)
 - [1.7.6](#176)
-- [Pre-1.7.6](#Pre-176)  – Most 2020 to 2022 Changelogs are lost.
+- [Pre 1.7.6](#pre-176) – Most 2020 to 2022 changelogs are lost.
 
 > Updates without a title generally comprised incremental improvements and revisions that gradually built up Vanilla RTX's many qualities over time, without focusing on any one central theme or major change.
 
@@ -283,7 +283,7 @@ This is a huge quality update, touching up on various blocks and items that were
 
 *Mounts of Mayhem.*
 
-Minor update targeting Minecraft's Mounts of Mayhem update. [View the commit](https://github.com/Cubeir/Vanilla-RTX/commit/4ef900790efaeff85c90411903d5067d1a890328).
+Minor update targeting Minecraft's Mounts of Mayhem update. [View the commit](https://github.com/Vanilla-RTX/Vanilla-RTX/commit/4ef900790efaeff85c90411903d5067d1a890328).
 
 ---
 
@@ -632,7 +632,7 @@ The last few updates revamped swamps, plains, and taiga biomes. In this release,
 > - Swamp tweaks: slightly darker skies, denser clouds, and smoother biome transitions, with murkier waters (Mangrove Swamp waters in particular appear murkier than before)
 
 - Fixed single-stage heightmaps on lanterns, which caused the glowing-chain issue to occur more frequently, particularly when lanterns are placed near chains
-> Special thanks to Davis8483 for reporting and investigating this issue at [Vanilla-RTX/issues/44](https://github.com/Cubeir/Vanilla-RTX/issues/44).
+> Special thanks to Davis8483 for reporting and investigating this issue at [Vanilla-RTX/issues/44](https://github.com/Vanilla-RTX/Vanilla-RTX/issues/44).
 
 - All flipbook PBR textures now use vanilla texture dimensions, even if only one frame was needed
 > Adjusted many animated heightmaps to reduce final normal shifts throughout the animation (e.g. lanterns, smoker).
@@ -1697,20 +1697,24 @@ This release separates Vanilla RTX Normals into two packs:
 - Fixed a pixel which appeared too bright on the chemical heat block
 - Decreased all concrete blocks' roughness contrast and decreased overall roughness
 
-## Pre 1.7.6
-> Prior to `1.7.6` there were tens of updates, notably
-`1.7.5`
-`1.7.4`
-`1.7.3`
-`1.7.2`
-`1.7.1`
-`1.7.0`
-`1.6.X`
-`1.5.X`
-`1.4.X`
-`1.3.X`
-`1.2.X`
-`1.1.X`
-`1.0.0 (Initial relesae)`
-> Eeverything before 1.7.6, and a few other versions along the way are missing from this history. They'll be added if they turn up. Modern direction of Vanilla RTX was settled starting with `1.6.0`, some parts to this day use assets from that time.
+---
 
+## Pre 1.7.6
+
+Prior to `1.7.6` there were tens of updates, notably:
+
+- `1.7.5`
+- `1.7.4`
+- `1.7.3`
+- `1.7.2`
+- `1.7.1`
+- `1.7.0`
+- `1.6.x`
+- `1.5.x`
+- `1.4.x`
+- `1.3.x`
+- `1.2.x`
+- `1.1.x`
+- `1.0.0` (initial release)
+
+> Everything before 1.7.6, and a few other versions along the way, are missing from this history. They'll be added if they turn up. The modern direction of Vanilla RTX was settled starting with `1.6.0`, and some parts to this day still use assets from that time.
