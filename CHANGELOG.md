@@ -7,7 +7,7 @@ Unless a note says otherwise, everything listed applies to all three packs: Vani
 A few terms you'll run into:
 - **Enhanced option:** an optional subpack that fixes ray tracing bugs in the base game through workarounds. It was called **Experimental** from 1.20.5 to 1.21.50, renamed to **Enhanced** in 1.21.60, and merged into the main pack in 1.21.206.
 - **MER / MERS:** the material textures (metalness, emissive, roughness, and later subsurface scattering properties) of a block.
-- **Normal maps / Heightmaps:** texture definitions that simulates surface details, like bumps or dents, Vanilla RTX uses Heightmaps and Vanilla RTX Normals/Opus normals, both packs utilize this to carve out the shape of each block to further elevate its character in their own unique way.
+- **Normal maps / Heightmaps:** texture definitions that simulates surface details, like bumps or dents. Heightmap changes apply only to Vanilla RTX and Normal maps changes only Vanilla RTX Normals, both packs utilize this to carve out the shape of each block to further elevate its character in their own unique way. Vanilla RTX Opus is impacted by any changes to types of texture map.
 - **MCPE-{Bug ID}:** a bug report on Mojang's issue tracker, [Mojira](https://bugs.mojang.com/).
 
 # Table of Contents
