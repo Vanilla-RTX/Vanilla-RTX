@@ -1,0 +1,8 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "fern_carried",
+    "metalness_emissive_roughness_subsurface": "fern_carried_mers",
+    "heightmap": "fern_carried_heightmap"
+  }
+}
