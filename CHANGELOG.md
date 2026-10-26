@@ -1,6 +1,6 @@
 # Vanilla RTX Changelog
 
-Below you will find the complete changelog of every Vanilla RTX version, from the earliest changelogs still on record up to the latest release. Newest versions come first. Future versions will be added once an update is released.
+Below you will find the complete changelog of every major Vanilla RTX update, from the earliest changelogs still on record up to the latest release. Newest versions come first. Future versions will be added once an update is released. Notes for minor updates will only be added alongside the next major update.
 
 Unless a note says otherwise, everything listed applies to all three packs: Vanilla RTX, Vanilla RTX Normals, and Vanilla RTX Opus. Differences are called out where they matter.
 
