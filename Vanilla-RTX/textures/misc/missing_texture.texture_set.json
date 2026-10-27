@@ -1,0 +1,8 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "missing_texture",
+    "metalness_emissive_roughness_subsurface": "missing_texture_mers",
+    "heightmap": "missing_texture_heightmap"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "howl_pottery_pattern",
+    "metalness_emissive_roughness_subsurface": "howl_pottery_pattern_mers",
+    "heightmap": "howl_pottery_pattern_heightmap"
+  }
+}
