@@ -1,0 +1,8 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "tinted_glass_carried",
+    "metalness_emissive_roughness_subsurface": "tinted_glass_carried_mers",
+    "heightmap": "tinted_glass_carried_heightmap"
+  }
+}
