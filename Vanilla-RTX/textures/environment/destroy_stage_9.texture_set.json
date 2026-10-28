@@ -3,6 +3,6 @@
   "minecraft:texture_set": {
     "color": "destroy_stage_9",
     "metalness_emissive_roughness_subsurface": "destroy_stage_9_mers",
-    "heightmap": "destroy_stage_9_heightmap"
+    "normal": "destroy_stage_9_normal"
   }
 }
