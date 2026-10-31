@@ -1,8 +1,0 @@
-{
-  "format_version": "1.21.30",
-  "minecraft:texture_set": {
-    "color": "slime_carried",
-    "metalness_emissive_roughness_subsurface": "slime_carried_mers",
-    "heightmap": "slime_carried_heightmap"
-  }
-}
