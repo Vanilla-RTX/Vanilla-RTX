@@ -6,7 +6,7 @@
             "min_engine_version": "1.12.0",
             "materials": {
                 "default": "entity_alphatest",
-                "eyes": "charged_creeper",
+                "eyes": "entity_alphatest",
                 "flower": "entity_alphatest"
             },
             "textures": {

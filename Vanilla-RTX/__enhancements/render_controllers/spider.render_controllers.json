@@ -15,14 +15,7 @@
         { "*": true }
       ],
       "materials": [ { "*": "Material.invisible" } ],
-      "textures": [ "Texture.default" ],
-      "ignore_lighting": true,
-      "color": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0,
-        "a": 1.0
-      }
+      "textures": [ "Texture.default" ]
     }
   }
 }

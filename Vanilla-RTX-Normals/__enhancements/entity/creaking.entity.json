@@ -5,7 +5,7 @@
             "identifier": "minecraft:creaking",
             "materials": {
                 "default": "entity_alphatest",
-                "eyes": "charged_creeper"
+                "eyes": "entity_alphatest"
             },
             "geometry": {
                 "default": "geometry.creaking",

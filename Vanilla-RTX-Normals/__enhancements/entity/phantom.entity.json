@@ -5,7 +5,7 @@
       "identifier": "minecraft:phantom",
       "materials": {
         "default": "phantom",
-        "invisible": "charged_creeper"
+        "invisible": "entity_alphatest"
       },
       "textures": {
         "default": "textures/entity/phantom"

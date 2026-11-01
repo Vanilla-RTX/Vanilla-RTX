@@ -10,7 +10,6 @@
       "geometry": "Geometry.default_bioluminescent",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.bioluminescent_layer" ],
-      "ignore_lighting": true,
       "color": {
         "r": 1.0,
         "g": 1.0,
@@ -25,7 +24,6 @@
       ],
       "materials": [ { "*": "Material.bioluminescent_layer" } ],
       "textures": [ "Texture.spots_1" ],
-      "ignore_lighting": true,
       "color": {
         "r": 1.0,
         "g": 1.0,
@@ -40,7 +38,6 @@
       ],
       "materials": [ { "*": "Material.bioluminescent_layer" } ],
       "textures": [ "Texture.spots_2" ],
-      "ignore_lighting": true,
       "color": {
         "r": 1.0,
         "g": 1.0,
@@ -52,7 +49,6 @@
       "geometry": "Geometry.default_bioluminescent",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.tendrils" ],
-      "ignore_lighting": false,
       "color": {
         "r": 1.0,
         "g": 1.0,
@@ -67,7 +63,6 @@
       ],
       "materials": [ { "*": "Material.bioluminescent_layer" } ],
       "textures": [ "Texture.heart" ],
-      "ignore_lighting": true,
       "color": {
         "r": 1.0,
         "g": 1.0,
@@ -83,7 +78,6 @@
       ],
       "materials": [ { "*": "Material.glow" } ],
       "textures": [ "Texture.heart" ],
-      "ignore_lighting": true,
       "color": {
         "r": 1.0,
         "g": 1.0,
@@ -99,7 +93,6 @@
         { "*": "variable.spots_1_alpha > 0.1 ? 1 : 0"},
         { "heart": false}
       ],
-      "ignore_lighting": true,
       "color": {
         "r": 1.0,
         "g": 1.0,
@@ -115,7 +108,6 @@
         { "*": "variable.spots_2_alpha > 0.1 ? 1 : 0"},
         { "heart": false}
       ],
-      "ignore_lighting": true,
       "color": {
         "r": 1.0,
         "g": 1.0,
