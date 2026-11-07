@@ -6,8 +6,7 @@
             "materials": {
                 "default": "entity_alphatest",
                 "bioluminescent_layer": "entity_alphatest",
-                "glow": "charged_creeper",
-                "blend": "entity_alphablend"
+                "glow": "entity_alphatest"
             },
             "textures": {
                 "default": "textures/entity/warden/warden",

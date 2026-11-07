@@ -6,7 +6,7 @@
       "min_engine_version": "1.8.0",
       "materials": {
         "default": "spider",
-        "invisible": "charged_creeper"
+        "invisible": "entity_alphatest"
       },
       "textures": {
         "default": "textures/entity/spider/cave_spider"

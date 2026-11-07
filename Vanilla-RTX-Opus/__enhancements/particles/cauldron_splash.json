@@ -56,7 +56,7 @@
               "variable.color.r",
               "variable.color.g",
               "variable.color.b",
-              "variable.color.a * 0.75"
+              "variable.color.a"
             ]
           },
           "interpolant": 0

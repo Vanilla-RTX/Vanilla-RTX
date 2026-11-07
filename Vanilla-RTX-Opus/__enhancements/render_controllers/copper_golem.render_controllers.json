@@ -36,9 +36,7 @@
             ],
             "textures": [
                 "Texture.eyes_default"
-            ],
-            "ignore_lighting": true,
-            "light_color_multiplier": 75
+            ]
         },
         "controller.render.copper_golem_eyes.exposed": {
             "geometry": "Geometry.eyes",
@@ -54,9 +52,7 @@
             ],
             "textures": [
                 "Texture.eyes_exposed"
-            ],
-            "ignore_lighting": true,
-            "light_color_multiplier": 30.0
+            ]
         },
         "controller.render.copper_golem_eyes.weathered": {
             "geometry": "Geometry.eyes",
@@ -72,9 +68,7 @@
             ],
             "textures": [
                 "Texture.eyes_weathered"
-            ],
-            "ignore_lighting": true,
-            "light_color_multiplier": 13.0
+            ]
         },
         "controller.render.copper_golem_eyes.oxidized": {
             "geometry": "Geometry.eyes",
@@ -90,9 +84,7 @@
             ],
             "textures": [
                 "Texture.eyes_oxidized"
-            ],
-            "ignore_lighting": true,
-            "light_color_multiplier": 1.33
+            ]
         },
         "controller.render.copper_golem_flower": {
             "geometry": "Geometry.flower",

@@ -6,7 +6,7 @@
       "min_engine_version": "1.8.0",
       "materials": {
         "default": "enderman",
-        "invisible": "charged_creeper"
+        "invisible": "entity_alphatest"
       },
       "geometry": {
         "default": "geometry.enderman.v1.8",

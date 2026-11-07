@@ -6,27 +6,6 @@
     "frog_spawn_carried": {
       "textures": "textures/blocks/frogspawn_carried"
     },
-    "slime_block_carried": {
-      "textures": "textures/blocks/slime_carried"
-    },
-    "honey_side_carried": {
-      "textures": "textures/blocks/honey_side_carried"
-    },
-    "honey_top_carried": {
-      "textures": "textures/blocks/honey_top_carried"
-    },
-    "honey_bottom_carried": {
-      "textures": "textures/blocks/honey_bottom_carried"
-    },
-    "tinted_glass_carried": {
-      "textures": "textures/blocks/tinted_glass_carried"
-    },
-    "ice_carried": {
-      "textures": "textures/blocks/ice_carried"
-    },
-    "frosted_ice_carried": {
-      "textures": "textures/blocks/frosted_ice_0_carried"
-    },
     "pumpkin_side_lit": {
       "textures": "textures/blocks/pumpkin_side_lit"
     },

@@ -5,7 +5,7 @@
             "identifier": "minecraft:ender_dragon",
             "materials": {
                 "default": "ender_dragon",
-                "glow": "charged_creeper",
+                "glow": "entity_alphatest",
                 "beam_material": "entity_beam",
                 "death_material": "entity_beam_additive",
                 "dissolve_0": "entity_dissolve_layer0.skinning",

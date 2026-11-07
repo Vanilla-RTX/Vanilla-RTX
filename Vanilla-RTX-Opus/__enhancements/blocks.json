@@ -10,28 +10,6 @@
             "west": "cauldron_water"
         }
     },
-    "ice": {
-        "carried_textures": "ice_carried"
-    },
-    "frosted_ice": {
-        "carried_textures": "frosted_ice_carried"
-    },
-    "tinted_glass": {
-        "carried_textures": "tinted_glass_carried"
-    },
-    "slime": {
-        "carried_textures": "slime_block_carried"
-    },
-    "honey_block": {
-        "carried_textures": {
-            "down": "honey_bottom_carried",
-            "east": "honey_side_carried",
-            "north": "honey_side_carried",
-            "south": "honey_side_carried",
-            "up": "honey_top_carried",
-            "west": "honey_side_carried"
-        }
-    },
     "lit_pumpkin": {
         "textures": {
             "down": "pumpkin_top_lit",

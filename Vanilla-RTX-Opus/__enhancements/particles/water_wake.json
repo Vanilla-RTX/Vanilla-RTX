@@ -20,6 +20,7 @@
           "variable.direction.z"
         ]
       },
+      "minecraft:particle_appearance_lighting": {},
       "minecraft:particle_appearance_billboard": {
         "size": [
           "variable.particle_life = 3 - variable.particle_lifetime; return variable.particle_life * 0.1;",
