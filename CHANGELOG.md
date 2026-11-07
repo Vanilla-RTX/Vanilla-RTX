@@ -12,6 +12,7 @@ A few terms you'll run into:
 
 # Table of Contents
 
+- [1.26.39](#12639) – Supervanilla RTX Adaption
 - [1.26.34](#12634) – Wilderness Bound
 - [1.26.21](#12621) – Ocean atmospheric overhaul, end blocks and coral revamps
 - [1.26.20](#12620) – Chaos Cubed game drop, POM, SSS and more...
@@ -55,6 +56,25 @@ A few terms you'll run into:
 > Updates without a title generally comprised incremental improvements and revisions that gradually built up Vanilla RTX's many qualities over time, without focusing on any one central theme or major change.
 
 ---
+
+## 1.26.39
+
+*This update prepares Vanilla RTX for the release of Supervanilla RTX, allowing it to take full advantage of [the features introduced by the shader mod](http://vanillartx.net/supervanilla-rtx-docs).*
+
+### Changes
+
+- Fixed opaque acacia leaves heightmap not being consistent with style of other opaque leaves along with having a falsely rotated texture.
+
+- Resolved inconsistencies concerning inclusion of heightmap/normal textures to avoid disturbing the orderliness of the terrain texture atlas, this is necessary for the Supervanilla RTX shader mod to load PBR for blocks rendered as entities correctly.
+
+- Added many new PBR texture sets for carried items with the same goal of keeping terrain.atlas orderly. Any texture that loads into terrain.atlas by default will have full PBR textures included moving forward forward, even if it may not display in-game.
+
+- Added basic uniform PBR values for applicable entities, requires Supervanilla RTX to be used by the shader.
+
+- Fixed baby villager walking animation missing with RTX.
+
+- Removed several entity enhancements that targeted unmodified Minecraft RTX, such as glowing entity eyes, in favor of Supervanilla RTX's proper emissive entity textures, which are now fully included with the pack where needed.
+
 
 ## 1.26.34
 
