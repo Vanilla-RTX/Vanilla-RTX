@@ -70,8 +70,6 @@ A few terms you'll run into:
 
 - Revised calcite MERS in preparation for the new calcite block set 
 
-- Revised
-
 - Revised emissivity of glow lichen and updated glow lichen texture with embedded alpha data for Supervanilla RTX
 
 - Revised subsurface scattering properties of Snow and Quartz wherever they appear
