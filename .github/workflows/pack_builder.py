@@ -53,7 +53,16 @@ Env vars (all optional, set by the workflow):
   RELEASE_NOTES_FOOTER   optional static text appended to the end of every
                          release's notes (e.g. install instructions, a
                          support link). Empty by default.
+  INDEX_FILE_NAME        optional file name for a machine-readable index of
+                         every pack in the build (written to dist/ beside
+                         the .mcpacks, so it ships as a release asset).
+                         Empty by default (no index). See write_index.
+  ENHANCEMENT_VARIANTS   "true" to also publish, for every pack that has an
+                         enhancements folder, a second .mcpack built
+                         without it (<id>-<version>-without-enhancements).
+                         Listed in the index, left out of the bundle.
 """
+import hashlib
 import json
 import os
 import re
@@ -70,6 +79,9 @@ DATE_TAG_RE = re.compile(r"^release-\d{4}-\d{2}-\d{2}$")
 ENHANCEMENTS_DIR_NAME = os.environ.get("ENHANCEMENTS_DIR_NAME", "__enhancements")
 BUNDLE_NAME_PREFIX = os.environ.get("BUNDLE_NAME_PREFIX", "All-Packs")
 RELEASE_NOTES_FOOTER = os.environ.get("RELEASE_NOTES_FOOTER", "").strip()
+INDEX_FILE_NAME = os.environ.get("INDEX_FILE_NAME", "").strip()
+ENHANCEMENT_VARIANTS = os.environ.get("ENHANCEMENT_VARIANTS", "").strip().lower() == "true"
+INDEX_FORMAT = 1
 
 EXCLUDE_PREFIXES = [
     tuple(PurePosixPath(p.strip()).parts)
@@ -240,15 +252,17 @@ def zip_dir_contents(src: Path, zip_path: Path):
                 zf.write(fp, fp.relative_to(src))
 
 
-def build_pack(pack_id: str, pack_root: Path, version: str, dist_dir: Path, work_dir: Path) -> Path:
-    build_dir = work_dir / pack_id
+def build_pack(pack_id: str, pack_root: Path, version: str, dist_dir: Path, work_dir: Path,
+               enhancements: bool = True) -> Path:
+    suffix = "" if enhancements else "-without-enhancements"
+    build_dir = work_dir / f"{pack_id}{suffix}"
     copy_filtered(pack_root, build_dir, skip_dirs=(ENHANCEMENTS_DIR_NAME,))
 
     enh_dir = pack_root / ENHANCEMENTS_DIR_NAME
-    if enh_dir.is_dir():
+    if enhancements and enh_dir.is_dir():
         copy_filtered(enh_dir, build_dir)  # merge, overwrites on conflict
 
-    zip_path = dist_dir / f"{pack_id}-{version}.mcpack"
+    zip_path = dist_dir / f"{pack_id}-{version}{suffix}.mcpack"
     zip_dir_contents(build_dir, zip_path)
     return zip_path
 
@@ -284,6 +298,82 @@ def write_release_notes(root: Path, built: dict, changes: list, note: str, full_
     (root / "RELEASE_NOTES.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def resolve_lang_key(pack_root: Path, value):
+    """A manifest may name itself "pack.name" / "pack.description" and keep the real text in
+    texts/en_US.lang. Returns the resolved text, or the value unchanged when it isn't a key or
+    no .lang file defines it."""
+    if not isinstance(value, str) or value not in ("pack.name", "pack.description"):
+        return value
+    texts = pack_root / "texts"
+    for lang in [texts / "en_US.lang", texts / "en_GB.lang", *sorted(texts.glob("*.lang"))]:
+        if not lang.is_file():
+            continue
+        for line in lang.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+            key, sep, text = line.partition("=")
+            if sep and key.strip() == value:
+                return text.split("\t#", 1)[0].strip()
+    return value
+
+
+def sha256_of(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def asset_entry(path: Path) -> dict:
+    return {"file": path.name, "size": path.stat().st_size, "sha256": sha256_of(path)}
+
+
+def write_index(root: Path, packs: list, built: dict, variants: dict, dist_dir: Path, tag: str):
+    """Writes INDEX_FILE_NAME into dist/: one entry per built pack, carrying everything an
+    installer needs to decide what to offer before downloading anything - identity (header and
+    first module uuid), the version, the release asset's file name, size and sha256, display
+    name and description (lang keys resolved), pack_scope, subpacks, the repo folder the pack
+    lives under (group), and - with ENHANCEMENT_VARIANTS - the same three asset fields for the
+    build without enhancements. `tag` is the release it belongs to, so a file name can always be
+    turned back into a download URL even after "latest" has moved on.
+
+    The schema is shared by every repository that runs this builder, so an installer reads them
+    all the same way; `format` changes only for a change an older reader would misread."""
+    entries = []
+    for pack_id, pack_root in packs:
+        zip_path, _ = built[pack_id]
+        manifest = json.loads((pack_root / "manifest.json").read_text(encoding="utf-8"))
+        header = manifest.get("header", {})
+        modules = manifest.get("modules") or [{}]
+        rel_parts = pack_root.relative_to(root).parts
+        entry = {"id": pack_id, **asset_entry(zip_path)}
+        entry.update({
+            "uuid": header.get("uuid"),
+            "module_uuid": modules[0].get("uuid"),
+            "version": header.get("version"),
+            "name": resolve_lang_key(pack_root, header.get("name")),
+            "description": resolve_lang_key(pack_root, header.get("description")),
+            "pack_scope": header.get("pack_scope"),
+            "group": rel_parts[0] if len(rel_parts) > 1 else None,
+            "subpacks": [
+                {"folder_name": sp.get("folder_name"), "name": sp.get("name")}
+                for sp in manifest.get("subpacks") or []
+            ],
+        })
+        if pack_id in variants:
+            entry["without_enhancements"] = asset_entry(variants[pack_id])
+        entries.append(entry)
+
+    index = {
+        "format": INDEX_FORMAT,
+        "tag": tag,
+        "built_utc": NOW.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "packs": entries,
+    }
+    index_path = dist_dir / INDEX_FILE_NAME
+    index_path.write_text(json.dumps(index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Wrote {index_path.name} ({len(entries)} pack(s))")
+
+
 def build_everything(root: Path, changes: list, note: str):
     dist_dir = root / "dist"
     work_dir = root / ".build-tmp"
@@ -300,11 +390,15 @@ def build_everything(root: Path, changes: list, note: str):
 
     print(f"Found {len(packs)} pack(s):")
     built = {}
+    variants = {}
     for pack_id, pack_root in packs:
         version = extract_version((pack_root / "manifest.json").read_text(encoding="utf-8")) or "unknown"
         has_enh = (pack_root / ENHANCEMENTS_DIR_NAME).is_dir()
         print(f"  {pack_id} (v{version}){' [enhancements merged]' if has_enh else ''}")
         built[pack_id] = (build_pack(pack_id, pack_root, version, dist_dir, work_dir), version)
+        if has_enh and ENHANCEMENT_VARIANTS:
+            variants[pack_id] = build_pack(pack_id, pack_root, version, dist_dir, work_dir, enhancements=False)
+            print(f"  {pack_id} (v{version}) [without enhancements]")
 
     if len(built) > 1:
         bundle_path = build_bundle([p for p, _ in built.values()], dist_dir)
@@ -313,6 +407,9 @@ def build_everything(root: Path, changes: list, note: str):
     current_tag = f"release-{NOW.strftime('%Y-%m-%d')}"
     full_changelog_line = build_full_changelog_line(root, current_tag)
     write_release_notes(root, built, changes, note, full_changelog_line)
+
+    if INDEX_FILE_NAME:
+        write_index(root, packs, built, variants, dist_dir, current_tag)
 
     shutil.rmtree(work_dir, ignore_errors=True)
     set_output("pack_count", str(len(built)))
