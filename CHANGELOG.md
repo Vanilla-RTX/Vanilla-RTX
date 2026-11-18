@@ -12,6 +12,7 @@ A few terms you'll run into:
 
 # Table of Contents
 
+- [1.26.310](#126310)
 - [1.26.39](#12639) – Supervanilla RTX Adaption
 - [1.26.34](#12634) – Wilderness Bound
 - [1.26.21](#12621) – Ocean atmospheric overhaul, end blocks and coral revamps
@@ -51,11 +52,32 @@ A few terms you'll run into:
 - [1.7.8](#178)
 - [1.7.7](#177)
 - [1.7.6](#176)
-- [Pre 1.7.6](#pre-176) – Most 2020 to 2022 changelogs are lost.
+- [Pre 1.7.6](#pre-176) – Most of 2020 to 2022 changelogs are lost.
 
 > Updates without a title generally comprised incremental improvements and revisions that gradually built up Vanilla RTX's many qualities over time, without focusing on any one central theme or major change.
 
 ---
+
+## 1.26.310
+
+*Minor revisions, mostly targeting Supervanilla RTX and preparing for Deep Freeze game drop.*
+
+### Changes
+
+- Increased uniform roughness of ender chest (Supervanilla RTX only)
+
+- Added uniform PBR override to the village bell block-entity (Supervanilla RTX only)
+
+- Revised calcite MERS in preparation for the new calcite block set 
+
+- Revised
+
+- Revised emissivity of glow lichen and updated glow lichen texture with embedded alpha data for Supervanilla RTX
+
+- Revised subsurface scattering properties of Snow and Quartz wherever they appear
+
+- Reworked Snow, Powder Snow, and Snowed grass side MERs in preparation for the new snow bricks to make room for coherence across the snow textures, darker/bluer parts are now generally deemed more wet
+
 
 ## 1.26.39
 
@@ -1723,12 +1745,7 @@ This release separates Vanilla RTX Normals into two packs:
 
 Prior to `1.7.6` there were tens of updates, notably:
 
-- `1.7.5`
-- `1.7.4`
-- `1.7.3`
-- `1.7.2`
-- `1.7.1`
-- `1.7.0`
+- `1.7.x`
 - `1.6.x`
 - `1.5.x`
 - `1.4.x`
@@ -1737,4 +1754,4 @@ Prior to `1.7.6` there were tens of updates, notably:
 - `1.1.x`
 - `1.0.0` (initial release)
 
-> Everything before 1.7.6, and a few other versions along the way, are missing from this history. They'll be added if they turn up. The modern direction of Vanilla RTX was settled starting with `1.6.0`, and some parts to this day still use assets from that time.
+> Everything before 1.7.6 is missing from this history. They'll be added if they turn up. The modern direction of Vanilla RTX was settled and began with the release of `1.6.0`, some parts to this day still use assets made during 1.6.x and 1.7.x updates.
