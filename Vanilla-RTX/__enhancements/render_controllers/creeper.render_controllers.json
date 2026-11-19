@@ -1,0 +1,15 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.creeper": {
+      "arrays": {
+        "textures": {
+          "Array.swell": [ "Texture.default", "Texture.flash" ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Array.swell[((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? 0 : 1]" ]
+    }
+  }
+}

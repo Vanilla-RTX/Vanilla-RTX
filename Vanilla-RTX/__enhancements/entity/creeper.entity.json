@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:creeper",
+      "min_engine_version": "1.8.0",
+      "textures": {
+        "default": "textures/entity/creeper/creeper",
+        "flash": "textures/entity/creeper/creeper_flash",
+        "charged": "textures/entity/creeper/creeper_armor"
+      },
+      "render_controllers": [
+        "controller.render.creeper",
+        {
+          "controller.render.creeper_armor": "query.is_powered"
+        }
+      ]
+    }
+  }
+}
