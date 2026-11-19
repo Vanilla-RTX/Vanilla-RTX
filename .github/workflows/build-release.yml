@@ -20,7 +20,6 @@ env:
   ENHANCEMENTS_DIR_NAME: __enhancements # <-- optional: change if this repo uses a different folder name (this is a folder/branch of resource pack is developed separately, but is merged down only for public builds)
   EXCLUDE_PATHS: "Vanilla-RTX-BTU, __VAULT" # <-- optional: comma-separated repo-relative folders to fully ignore
   INDEX_FILE_NAME: index.json # <-- optional: machine-readable index of every pack, read by the Vanilla RTX App's pack updater
-  ENHANCEMENT_VARIANTS: "true" # <-- optional: also publish each pack without its enhancements, for the app's Enhancements toggle
   RELEASE_NOTES_FOOTER: |
     Download and import each individual `.mcpack`, or get the top `.mcaddon` file which bundles all `.mcpack` files in one package.
 

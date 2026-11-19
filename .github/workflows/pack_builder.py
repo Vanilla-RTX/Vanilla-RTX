@@ -57,10 +57,6 @@ Env vars (all optional, set by the workflow):
                          every pack in the build (written to dist/ beside
                          the .mcpacks, so it ships as a release asset).
                          Empty by default (no index). See write_index.
-  ENHANCEMENT_VARIANTS   "true" to also publish, for every pack that has an
-                         enhancements folder, a second .mcpack built
-                         without it (<id>-<version>-without-enhancements).
-                         Listed in the index, left out of the bundle.
 """
 import hashlib
 import json
@@ -80,7 +76,6 @@ ENHANCEMENTS_DIR_NAME = os.environ.get("ENHANCEMENTS_DIR_NAME", "__enhancements"
 BUNDLE_NAME_PREFIX = os.environ.get("BUNDLE_NAME_PREFIX", "All-Packs")
 RELEASE_NOTES_FOOTER = os.environ.get("RELEASE_NOTES_FOOTER", "").strip()
 INDEX_FILE_NAME = os.environ.get("INDEX_FILE_NAME", "").strip()
-ENHANCEMENT_VARIANTS = os.environ.get("ENHANCEMENT_VARIANTS", "").strip().lower() == "true"
 INDEX_FORMAT = 1
 
 EXCLUDE_PREFIXES = [
@@ -252,17 +247,15 @@ def zip_dir_contents(src: Path, zip_path: Path):
                 zf.write(fp, fp.relative_to(src))
 
 
-def build_pack(pack_id: str, pack_root: Path, version: str, dist_dir: Path, work_dir: Path,
-               enhancements: bool = True) -> Path:
-    suffix = "" if enhancements else "-without-enhancements"
-    build_dir = work_dir / f"{pack_id}{suffix}"
+def build_pack(pack_id: str, pack_root: Path, version: str, dist_dir: Path, work_dir: Path) -> Path:
+    build_dir = work_dir / pack_id
     copy_filtered(pack_root, build_dir, skip_dirs=(ENHANCEMENTS_DIR_NAME,))
 
     enh_dir = pack_root / ENHANCEMENTS_DIR_NAME
-    if enhancements and enh_dir.is_dir():
+    if enh_dir.is_dir():
         copy_filtered(enh_dir, build_dir)  # merge, overwrites on conflict
 
-    zip_path = dist_dir / f"{pack_id}-{version}{suffix}.mcpack"
+    zip_path = dist_dir / f"{pack_id}-{version}.mcpack"
     zip_dir_contents(build_dir, zip_path)
     return zip_path
 
@@ -327,13 +320,12 @@ def asset_entry(path: Path) -> dict:
     return {"file": path.name, "size": path.stat().st_size, "sha256": sha256_of(path)}
 
 
-def write_index(root: Path, packs: list, built: dict, variants: dict, dist_dir: Path, tag: str):
+def write_index(root: Path, packs: list, built: dict, dist_dir: Path, tag: str):
     """Writes INDEX_FILE_NAME into dist/: one entry per built pack, carrying everything an
     installer needs to decide what to offer before downloading anything - identity (header and
     first module uuid), the version, the release asset's file name, size and sha256, display
-    name and description (lang keys resolved), pack_scope, subpacks, the repo folder the pack
-    lives under (group), and - with ENHANCEMENT_VARIANTS - the same three asset fields for the
-    build without enhancements. `tag` is the release it belongs to, so a file name can always be
+    name and description (lang keys resolved), pack_scope, subpacks, and the repo folder the
+    pack lives under (group). `tag` is the release it belongs to, so a file name can always be
     turned back into a download URL even after "latest" has moved on.
 
     The schema is shared by every repository that runs this builder, so an installer reads them
@@ -359,8 +351,6 @@ def write_index(root: Path, packs: list, built: dict, variants: dict, dist_dir: 
                 for sp in manifest.get("subpacks") or []
             ],
         })
-        if pack_id in variants:
-            entry["without_enhancements"] = asset_entry(variants[pack_id])
         entries.append(entry)
 
     index = {
@@ -390,15 +380,11 @@ def build_everything(root: Path, changes: list, note: str):
 
     print(f"Found {len(packs)} pack(s):")
     built = {}
-    variants = {}
     for pack_id, pack_root in packs:
         version = extract_version((pack_root / "manifest.json").read_text(encoding="utf-8")) or "unknown"
         has_enh = (pack_root / ENHANCEMENTS_DIR_NAME).is_dir()
         print(f"  {pack_id} (v{version}){' [enhancements merged]' if has_enh else ''}")
         built[pack_id] = (build_pack(pack_id, pack_root, version, dist_dir, work_dir), version)
-        if has_enh and ENHANCEMENT_VARIANTS:
-            variants[pack_id] = build_pack(pack_id, pack_root, version, dist_dir, work_dir, enhancements=False)
-            print(f"  {pack_id} (v{version}) [without enhancements]")
 
     if len(built) > 1:
         bundle_path = build_bundle([p for p, _ in built.values()], dist_dir)
@@ -409,7 +395,7 @@ def build_everything(root: Path, changes: list, note: str):
     write_release_notes(root, built, changes, note, full_changelog_line)
 
     if INDEX_FILE_NAME:
-        write_index(root, packs, built, variants, dist_dir, current_tag)
+        write_index(root, packs, built, dist_dir, current_tag)
 
     shutil.rmtree(work_dir, ignore_errors=True)
     set_output("pack_count", str(len(built)))
