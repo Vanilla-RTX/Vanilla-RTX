@@ -1,7 +1,0 @@
-{
-    "format_version": "1.21.30",
-    "minecraft:texture_set": {
-        "color": "drowned_trident_rtx",
-        "metalness_emissive_roughness_subsurface": "drowned_trident_rtx_mers"
-    }
-}
