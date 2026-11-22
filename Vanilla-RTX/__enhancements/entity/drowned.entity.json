@@ -1,0 +1,67 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:drowned",
+      "min_engine_version": "1.16.0",
+      "materials": {
+        "default": "drowned",
+        "trident": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/zombie/drowned",
+        "baby": "textures/entity/zombie/drowned_baby",
+        "trident": "textures/entity/zombie/drowned_trident_rtx"
+      },
+      "geometry": {
+        "default": "geometry.zombie.drowned.v1.16",
+        "baby": "geometry.zombie.drowned.baby.rtx"
+      },
+      "scripts": {
+        "animate": [
+          "look_at_target",
+          "move",
+          {
+            "riding.body": "query.is_riding"
+          },
+          {
+            "riding.arms": "query.is_riding"
+          },
+          {
+            "riding.legs": "query.is_riding"
+          },
+          "holding",
+          {
+            "charging": "query.is_charging"
+          },
+          "attack_controller",
+          {
+            "brandish_spear": "variable.is_brandishing_spear"
+          },
+          "bob",
+          {
+            "damage_nearby_mobs": "variable.damage_nearby_mobs"
+          },
+          {
+            "use_item_progress": "( variable.use_item_interval_progress > 0.0 ) || ( variable.use_item_startup_progress > 0.0 )"
+          },
+          {
+            "swimming": "variable.swim_amount > 0.0"
+          },
+          {
+            "rtx_baby_trident": "query.is_baby && query.graphics_mode_is_any('raytraced')"
+          }
+        ]
+      },
+      "animations": {
+        "rtx_baby_trident": "animation.drowned.rtx_baby_trident"
+      },
+      "render_controllers": [
+        "controller.render.drowned.rtx",
+        {
+          "controller.render.drowned.rtx_baby_trident": "query.is_baby && query.graphics_mode_is_any('raytraced') && query.is_item_name_any('slot.weapon.mainhand', 0, 'minecraft:trident')"
+        }
+      ]
+    }
+  }
+}
