@@ -4,21 +4,19 @@
     "controller.render.phantom": {
       "geometry": "Geometry.default",
       "part_visibility": [
-        { "*": "query.is_invisible ? 0 : 1"}
+        { "*": "query.is_invisible ? 0 : 1" },
+        { "eyes": false }
       ],
-      "materials": [ 
-        { "*": "Material.default" }
-    ],
+      "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
     "controller.render.phantom.eyes": {
-      "geometry": "Geometry.eyes",
+      "geometry": "Geometry.default",
       "part_visibility": [
-        { "*": true}
+        { "*": false },
+        { "eyes": true }
       ],
-      "materials": [ 
-        { "*": "Material.invisible" }
-    ],
+      "materials": [ { "*": "Material.invisible" } ],
       "textures": [ "Texture.default" ]
     }
   }
