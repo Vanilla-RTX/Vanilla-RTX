@@ -44,7 +44,7 @@
                     1.0
                 ]
             },
-            "light_color_multiplier": 0.3
+            "light_color_multiplier": 0.2
         },
         "controller.render.breeze_wind_mid": {
             "geometry": "Geometry.breeze_wind_mid",
@@ -66,7 +66,7 @@
                     1.0
                 ]
             },
-            "light_color_multiplier": 0.295
+            "light_color_multiplier": 0.197
         },
         "controller.render.breeze_wind_bottom": {
             "geometry": "Geometry.breeze_wind_bottom",
@@ -88,7 +88,7 @@
                     1.0
                 ]
             },
-            "light_color_multiplier": 0.29
+            "light_color_multiplier": 0.193
         }
     }
 }
