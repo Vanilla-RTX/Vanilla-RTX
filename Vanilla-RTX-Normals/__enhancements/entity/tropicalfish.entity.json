@@ -24,9 +24,7 @@
       },
       "geometry": {
         "typeA": "geometry.tropicalfish_a",
-        "typeB": "geometry.tropicalfish_b",
-        "patternA": "geometry.tropicalfish_a.pattern",
-        "patternB": "geometry.tropicalfish_b.pattern"
+        "typeB": "geometry.tropicalfish_b"
       },
       "render_controllers": [
         "controller.render.tropicalfish",
